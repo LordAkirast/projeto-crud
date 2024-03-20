@@ -1,0 +1,15 @@
+O que eu travei?
+
+Não sei as configurações iniciais necessárias para o prisma e typescript.
+Precisaria de todos os códigos que preciso rodar, pois não sei como configurar corretamente o typescript.
+
+
+Prisma:
+Não sei como configurar nem rodar o prisma. 
+
+Npm Start:
+AO rodar o código dá um erro de permission denied. Não sei porquê.
+
+Routers:
+Esqueci como se usa routers.
+

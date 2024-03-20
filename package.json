@@ -2,26 +2,10 @@
   "name": "projeto-crud",
   "version": "1.0.0",
   "description": "",
-  "main": "src/app.js",
+  "main": "src/app.ts",
   "scripts": {
-    "prebuild": "rm -rf dist",
     "build": "tsc -p tsconfig.build.json",
-    "prepare": "husky install",
-    "start": "src/app.js",
-    "migration:run": "prisma migrate deploy",
-    "migration:generate": "npm run dev:load-envs prisma migrate dev",
-    "lint": "eslint .",
-    "lint:staged": "lint-staged",
-    "test": "cross-env NODE_ENV=test jest --passWithNoTests --runInBand",
-    "test:migration:run": "npm run test:load-envs prisma migrate deploy",
-    "test:migration:generate": "npm run test:load-envs prisma migrate dev",
-    "test:watch": "jest --watch --passWithNoTests --runInBand",
-    "test:load-envs": "dotenv -e .env.test",
-    "test:seed": "npm run test:load-envs prisma db seed",
-    "dev:load-envs": "dotenv -e .env.development",
-    "dev:migration:run": "npm run dev:load-envs prisma migrate deploy",
-    "dev:migration:generate": "npm run dev:load-envs prisma migrate dev",
-    "dev:seed": "npm run dev:load-envs prisma db seed",
+    "start": "ts-node src/app.ts",
     "dev": "cross-env NODE_ENV=development nodemon --watch 'src/' --exec 'ts-node -r tsconfig-paths/register ./src/server.ts' -e ts"
   },
   "keywords": [
@@ -34,9 +18,6 @@
     "nodejs"
   ],
   "license": "ISC",
-  "prisma": {
-    "seed": "npm run dev:load-envs -- ts-node prisma/seed.ts"
-  },
   "devDependencies": {
     "@faker-js/faker": "^6.3.1",
     "@types/bcrypt": "^5.0.0",
@@ -65,7 +46,7 @@
     "prisma": "^3.14.0",
     "supertest": "^6.2.3",
     "ts-jest": "^26.5.5",
-    "ts-node": "^10.7.0",
+    "ts-node": "^10.9.2",
     "tsconfig-paths": "3.9.0",
     "ttypescript": "^1.5.13",
     "typescript": "^4.2.4",
