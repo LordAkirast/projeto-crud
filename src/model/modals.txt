@@ -1,0 +1,9 @@
+createTenant = 
+{
+    "id" : "number",
+    "name": "string",
+    "apartment": "string",
+    "complement": "string",
+    "parkingSpot": true|false,
+    "housingType": "Bought" | "Rent"
+}

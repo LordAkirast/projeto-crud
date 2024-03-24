@@ -18,3 +18,12 @@ model testTable {
   model String 
   active Boolean 
 }
+
+model tenants {
+  id  Int @id @default(autoincrement())
+  name String 
+  apartment Int @unique
+  complement String
+  parkingSpot Boolean
+  housingType String
+}
