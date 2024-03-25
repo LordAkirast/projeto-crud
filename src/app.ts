@@ -15,5 +15,4 @@ app
   .patch('/update', updateTenants)
   .delete('/delete', deleteTenant)
 
-app.listen(4000, () => console.log('Servidor rodando na porta 4000'))
-
+export default app;
