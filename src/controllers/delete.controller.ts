@@ -7,24 +7,24 @@ async function deleteTenant(req: Request, res: Response) {
 
     const tenantId = req.body.id;
 
-    console.log('1')
+   // ///console.log('1')
 
     try {
-        console.log('2')
+        //////console.log('2')
 
-        console.log(tenantId)
+        ///console.log(tenantId)
 
         const idVerify = await prisma.tenants.findFirst({
             where: { id: tenantId }
 
         })
-        console.log('3')
+        ///console.log('3')
 
         if (!idVerify) {
-            console.log('4')
+            ///console.log('4')
             return res.status(404).send("User ID não encontrado.")
         } else {
-            console.log('5')
+            ///console.log('5')
 
             const deletion = await prisma.tenants.delete({
                 where: { id: tenantId }

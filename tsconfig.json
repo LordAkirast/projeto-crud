@@ -6,6 +6,7 @@
     "noImplicitAny": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "noEmit": true,
     "esModuleInterop": true,
     "rootDirs": ["src", "tests"],
     "baseUrl": "src",
