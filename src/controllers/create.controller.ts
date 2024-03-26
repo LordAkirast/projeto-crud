@@ -31,7 +31,7 @@ export async function createTenant(req: Request, res: Response) {
 
 
 
-  console.log("ID 1: Passou pela verificação de parkingSpot e HOusingTYpe.")
+  ///console.log("ID 1: Passou pela verificação de parkingSpot e HOusingTYpe.")
 
   const verifyTenant = await prisma.tenants.findFirst({
     where: { apartment: tenant.apartment },
@@ -41,16 +41,17 @@ export async function createTenant(req: Request, res: Response) {
   if (verifyTenant) {
     return res.status(409).json("Error: Este apartamento já foi comprado ou alugado por um inquilino.")
   } else {
-    console.log("ID 2: Passou pela verificação de apartamento já estar alocado.")
+    ///console.log("ID 2: Passou pela verificação de apartamento já estar alocado.")
 
     try {
 
       const createdTenant = await prisma.tenants.create({ data: tenant });
-      console.log("ID 3: Apartamento Alocado!")
+      ///console.log("ID 3: Apartamento Alocado!")
       return res.status(201).json({ tenant: createdTenant });
 
+
     } catch (error) {
-      console.log("ERR 1: Erro: ", error)
+      ///console.log("ERR 1: Erro: ", error)
       return res.status(500).json({ error: "Ocorreu um erro ao criar o inquilino." });
     }
   }

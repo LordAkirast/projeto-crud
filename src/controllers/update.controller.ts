@@ -12,6 +12,7 @@ type userBody = {
     housingType: "Bought" | "Rent";
 }
 
+
 async function updateTenants(req: Request, res: Response) {
 
     const tenant = req.body as userBody;
@@ -44,7 +45,7 @@ async function updateTenants(req: Request, res: Response) {
     if (!verifyTenant) {
         return res.status(404).json("Error: User ID não encontrado.")
     } else {
-        console.log("ID: Passou pela verificação de ID já estar alocado.")
+        ///console.log("ID: Passou pela verificação de ID já estar alocado.")
 
         try {
 
@@ -52,11 +53,11 @@ async function updateTenants(req: Request, res: Response) {
                 where: { id: tenant.id },
                 data: tenant ,
             });
-            console.log("UPDATE: Dados atualizados!")
+            ///console.log("UPDATE: Dados atualizados!")
             return res.status(200).json({ tenant: updateTenant });
 
         } catch (error) {
-            console.log("ERR UPDATE 1: Erro: ", error)
+            ///console.log("ERR UPDATE 1: Erro: ", error)
             return res.status(500).json({ error: "Ocorreu um erro ao atualizar o inquilino." });
         }
     }
