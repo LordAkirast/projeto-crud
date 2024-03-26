@@ -7,3 +7,6 @@ createTenant =
     "parkingSpot": true|false,
     "housingType": "Bought" | "Rent"
 }
+
+
+test
