@@ -5,7 +5,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient()
 
 
-async function readTenants(req: Request, res: Response) {
+export async function readTenants(req: Request, res: Response) {
 
     try {
         const readTenant = await prisma.tenants.findMany()
@@ -16,4 +16,28 @@ async function readTenants(req: Request, res: Response) {
 
 }
 
-export default readTenants;
+export async function readTenant(req: Request, res: Response) {
+
+    let idStr = req.params.id
+    let id = parseInt(idStr);
+
+    
+    if (isNaN(id)) {
+        return res.status(404).send('Registro não encontrado!');
+    }
+
+
+    try {
+        const readTenant = await prisma.tenants.findFirst({
+            where: { id: id }
+
+        })
+        return res.status(200).send(readTenant)
+
+
+    } catch (error) {
+        return res.status(500).send("Ocorreu um erro: " + error)
+    }
+
+}
+ 
