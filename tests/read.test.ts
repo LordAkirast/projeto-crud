@@ -1,9 +1,26 @@
 import app from '../src/app';
 import supertest from 'supertest';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient()
+
+const data = {
+    name: "TestRead",
+    apartment: 999,
+    complement: "Test Block",
+    parkingSpot: true,
+    housingType: "Rent"
+}
+
+beforeAll(async () => {
+    await prisma.tenants.deleteMany()
+    await prisma.tenants.create({ data })
+    console.log('User Created!')
+})
 
 
 
-///configurar para receber id por params. tem que mudar a rota de read.
+///configurar para criar uma informação e ler ela
 describe("GET /read", () => {
     it("shall return the created users and return status 200", async () => {
         const result = await supertest(app).get("/read");
@@ -12,7 +29,14 @@ describe("GET /read", () => {
     })
 
     it("given an id, it shall return the created user and status 200", async () => {
-        const result = await supertest(app).get("/read/:id");
+
+        const findCreatedTenant = await prisma.tenants.findFirst({
+            where: {apartment : 999}
+        })
+
+        const id = findCreatedTenant.id
+        console.log(id)
+        const result = await supertest(app).get(`/read/${id}`);
         const status = result.status;
         expect(status).toEqual(200)
     })
