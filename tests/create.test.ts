@@ -12,6 +12,11 @@ beforeEach(async () => {
     console.log('Database cleaned!')
 })
 
+afterAll(async () => {
+    await prisma.tenants.deleteMany()
+    console.log('Database Cleaned!')
+})
+
 
 describe("POST /create", () => {
     it("given a valid body it should return 201", async () => {

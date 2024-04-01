@@ -20,7 +20,6 @@ beforeAll(async () => {
 
 
 
-///configurar para criar uma informação e ler ela
 describe("GET /read", () => {
     it("shall return the created users and return status 200", async () => {
         const result = await supertest(app).get("/read");
