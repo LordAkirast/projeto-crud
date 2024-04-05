@@ -12,7 +12,6 @@ const prisma = new PrismaClient()
 
 ///criar uma factory | separar os ambientes de dev, UAT e prod
 ///fazer as partes dos ambientes, mexer em cada ambeinte separado e configurar isso.
-///arquitetura
 
 beforeEach(async () => {
     //await prisma.tenants.deleteMany()

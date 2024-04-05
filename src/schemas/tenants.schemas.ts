@@ -10,4 +10,13 @@ const tenantSchema = Joi.object({
     housingType: Joi.string().valid('Bought','Rent').required()
   })
 
-  export default tenantSchema
+  const tenantSchemaUpdate = Joi.object({
+    id: Joi.number().required(),
+    name: Joi.string().required().min(3),
+    apartment: Joi.number().required(),
+    complement: Joi.string(),
+    parkingSpot: Joi.boolean().required(),
+    housingType: Joi.string().valid('Bought','Rent').required()
+  })
+  
+  export { tenantSchema, tenantSchemaUpdate };
