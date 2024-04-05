@@ -12,7 +12,6 @@ const prisma = new PrismaClient()
 
 ///criar uma factory | separar os ambientes de dev, UAT e prod
 ///fazer as partes dos ambientes, mexer em cada ambeinte separado e configurar isso.
-///fazer testes de validações do schema
 ///arquitetura
 
 beforeEach(async () => {
@@ -40,7 +39,7 @@ describe("POST /create", () => {
             expect(['Bought', 'Rent']).toContainEqual(body.housingType);
         }
         verifyBody()
-        
+
         expect(typeof body.apartment).toBe('number')
         expect(status).toEqual(201);
     });

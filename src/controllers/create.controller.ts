@@ -1,32 +1,10 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import Joi from "joi";
+import tenantSchema from "../schemas/tenants.schemas";
+import userBody from "../protocols/test.protocols";
 
 const prisma = new PrismaClient()
-
-
-
-///colocar em pasta de schemas
-const tenantSchema = Joi.object({
-  name: Joi.string().required().min(3),
-  apartment: Joi.number().required(),
-  complement: Joi.string(),
-  parkingSpot: Joi.boolean().required(),
-  housingType: Joi.string().valid('Bought','Rent').required()
-})
-
-
-///colocar em protocols
-type userBody = {
-  id: number;
-  name: string;
-  apartment: number;
-  complement: string;
-  parkingSpot: boolean;
-  housingType: "Bought" | "Rent";
-}
-
-
 
 export async function createTenant(req: Request, res: Response) {
 

@@ -1,10 +1,11 @@
-const body = {
-    name: "Dritest",
-    apartment: 8999,
-    complement: "Bloco 13:53666",
-    parkingSpot: true,
-    housingType: "Rent"
-};
+type userBody = {
+    id: number;
+    name: string;
+    apartment: number;
+    complement: string;
+    parkingSpot: boolean;
+    housingType: "Bought" | "Rent";
+  }
 
 
-export default body
+export default userBody
