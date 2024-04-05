@@ -8,6 +8,7 @@
     "experimentalDecorators": true,
     "noEmit": true,
     "esModuleInterop": true,
+    "moduleResolution": "Node",
     "rootDirs": ["src", "tests"],
     "baseUrl": "src",
     "paths": {

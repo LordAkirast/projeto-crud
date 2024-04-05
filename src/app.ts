@@ -4,6 +4,15 @@ import createTenant from './controllers/create.controller';
 import updateTenants from './controllers/update.controller';
 import deleteTenant from './controllers/delete.controller';
 import { readTenants, readTenant } from './controllers/read.controller';
+import dotenv from 'dotenv'
+
+dotenv.config({
+  path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env.dev'
+})
+
+
+console.log(process.env.NODE_ENV)
+
 
 const app = express();
 app

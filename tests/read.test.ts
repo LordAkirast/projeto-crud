@@ -13,11 +13,16 @@ const data = {
 }
 
 beforeAll(async () => {
-    await prisma.tenants.deleteMany()
+   // await prisma.tenants.deleteMany()
+    await prisma.$executeRaw`TRUNCATE TABLE "tenants" RESTART IDENTITY` //gpt - it will resets ids from tenant to 1
     await prisma.tenants.create({ data })
-    console.log('User Created!')
+    //console.log('User Created!')
 })
 
+afterAll(async () => {
+    await prisma.tenants.deleteMany()
+    //console.log('Database Cleaned!')
+})
 
 
 describe("GET /read", () => {
@@ -34,7 +39,6 @@ describe("GET /read", () => {
         })
 
         const id = findCreatedTenant.id
-        console.log(id)
         const result = await supertest(app).get(`/read/${id}`);
         const status = result.status;
         expect(status).toEqual(200)

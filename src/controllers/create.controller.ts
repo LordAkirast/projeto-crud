@@ -1,9 +1,22 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
+import Joi from "joi";
 
 const prisma = new PrismaClient()
 
 
+
+///colocar em pasta de schemas
+const tenantSchema = Joi.object({
+  name: Joi.string().required().min(3),
+  apartment: Joi.number().required(),
+  complement: Joi.string(),
+  parkingSpot: Joi.boolean().required(),
+  housingType: Joi.string().valid('Bought','Rent').required()
+})
+
+
+///colocar em protocols
 type userBody = {
   id: number;
   name: string;
@@ -13,25 +26,16 @@ type userBody = {
   housingType: "Bought" | "Rent";
 }
 
+
+
 export async function createTenant(req: Request, res: Response) {
 
   const tenant = req.body as userBody;
 
-  if (!tenant.name || tenant.name.trim() === "") {
-    return res.status(400).json({ error: "O campo 'name' é obrigatório." });
-  } else if (tenant.apartment == null || typeof tenant.apartment !== "number" ) {
-    return res.status(400).json({ error: "O campo 'apartment' é obrigatório e deve ser numérico." });
-  } else if (!tenant.complement || tenant.complement.trim() === "") {
-    tenant.complement = 'N/A'
-  } else if (typeof tenant.parkingSpot !== "boolean") {
-    return res.status(400).json({ error: "O campo 'parkingSpot' deve ser do tipo booleano." });
-  } else if (tenant.housingType !== "Bought" && tenant.housingType !== "Rent") {
-    return res.status(400).json({ error: "O campo 'housingType' deve ser 'Bought' ou 'Rent'." });
+  const {value, error} = tenantSchema.validate(tenant)
+  if (error) {
+    return res.status(422).send(error.details[0].message)
   }
-
-
-
-  ///console.log("ID 1: Passou pela verificação de parkingSpot e HOusingTYpe.")
 
   const verifyTenant = await prisma.tenants.findFirst({
     where: { apartment: tenant.apartment },

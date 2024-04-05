@@ -13,14 +13,14 @@ const data = {
 }
 
 beforeAll(async () => {
-    await prisma.tenants.deleteMany()
+   // await prisma.tenants.deleteMany()
     await prisma.$executeRaw`TRUNCATE TABLE "tenants" RESTART IDENTITY` //gpt - it will resets ids from tenant to 1
-    console.log('Tenants IDs reseted!')
+    //console.log('Tenants IDs reseted!')
 })
 
 afterAll(async () => {
     await prisma.tenants.deleteMany()
-    console.log('Database Cleaned!')
+    //console.log('Database Cleaned!')
 })
 
 describe("delete /delete", () => {
