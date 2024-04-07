@@ -7,8 +7,9 @@
     "build": "tsc -p tsconfig.build.json",
     "start": "ts-node src/server.ts",
     "dev": "cross-env NODE_ENV=development nodemon --watch 'src/' --exec 'ts-node ./src/server.ts' -e ts",
-    "test": "jest",
-    "test:migration:run": "dotenv -e .env.test prisma migrate deploy"
+    "test:load-envs": "dotenv -e .env.test",
+    "test:migration:run": "npm run test:load-envs prisma migrate deploy",
+    "test": "npm run test:load-envs jest"
   },
   "keywords": [
     "driven.t",

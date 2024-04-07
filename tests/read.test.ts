@@ -39,6 +39,9 @@ describe("GET /read", () => {
         })
 
         const id = findCreatedTenant.id
+        if (!id) {
+            return '´Error: ${id} not found!´'
+        }
         const result = await supertest(app).get(`/read/${id}`);
         const status = result.status;
         expect(status).toEqual(200)
