@@ -3,6 +3,7 @@ import { PrismaClient } from "@prisma/client";
 import Joi from "joi";
 import { tenantSchema } from "../schemas/tenants.schemas";
 import userBody from "../protocols/test.protocols";
+import createTenantService from "../services/create.service";
 
 const prisma = new PrismaClient()
 
@@ -10,35 +11,34 @@ const prisma = new PrismaClient()
 /// o que eu não sei?
 ///como identificar e separar em routers, services etc...
 
+
+///routers só vai fazer a parte de pegar a rota, o endpoint dela e chamar o controller. 
+///as funções CRUD, se forem do mesmo modelo, devem ficar no mesmo arquivo de controller
+
+
 export async function createTenant(req: Request, res: Response) {
 
   const tenant = req.body as userBody;
 
-  const {value, error} = tenantSchema.validate(tenant)
+  ///middleware
+  const { value, error } = tenantSchema.validate(tenant)
   if (error) {
     return res.status(422).send(error.details[0].message)
   }
+  ///middleware
+  try {
 
-  const verifyTenant = await prisma.tenants.findFirst({
-    where: { apartment: tenant.apartment },
-  })
+    const result = createTenantService(tenant)
+    res.status(201).send(result)
 
+  } catch (error) {
+    console.log('bbbbbbbbbbbbbbbbbb')
+    res.status(500).send(error.message)
 
-  if (verifyTenant) {
-    return res.status(409).json("Error: Este apartamento já foi comprado ou alugado por um inquilino.")
-  } else {
-
-    try {
-
-      const createdTenant = await prisma.tenants.create({ data: tenant });
-      return res.status(201).json({ tenant: createdTenant });
-
-
-    } catch (error) {
-      return res.status(500).json({ error: "Ocorreu um erro ao criar o inquilino." });
-    }
   }
+
 }
+
 
 ///omit example:
 ///tenant<Omit, complement>
